@@ -5,9 +5,20 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Do-IT! Session</title>
     <style>
+      :root {
+        --card-max: 420px;
+        --btn-radius: 10px;
+        --btn-bg: #0366d6;
+        --btn-bg-hover: #024ea2;
+        --btn-color: #fff;
+        --shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
       body {
         margin: 0;
-        padding: 0;
         background: #fff;
         font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo',
           'Noto Sans KR', Arial, sans-serif;
@@ -18,42 +29,66 @@
       }
       .wrap {
         width: 100%;
-        max-width: 420px;
+        max-width: var(--card-max);
+        padding: 16px;
         text-align: center;
       }
+
+      /* 로고 */
       .logo {
         margin-bottom: 16px;
       }
       .logo img {
         max-height: 80px;
       }
+
+      /* 버튼들 (세로 나란히, 전체 폭 차지) */
+      .btn-col {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        margin: 8px 0 6px;
+      }
+      .btn-col a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 14px;
+        text-decoration: none;
+        font-weight: 700;
+        color: var(--btn-color);
+        background: var(--btn-bg);
+        border-radius: var(--btn-radius);
+        box-shadow: var(--shadow);
+        line-height: 1;
+        width: 100%; /* 사진과 같은 폭 */
+      }
+      .btn-col a:hover {
+        background: var(--btn-bg-hover);
+      }
+      .btn-col a svg {
+        width: 22px;
+        height: 22px;
+        display: inline-block;
+      }
+
+      /* 안내 문구 */
+      .small {
+        color: #444;
+        font-size: 0.92rem;
+        margin: 8px 0 14px;
+        line-height: 1.35;
+      }
+
+      /* 사진 영역 */
       .photos img {
         width: 100%;
         display: block;
         margin: 8px 0;
         border-radius: 12px;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-      }
-      .links {
-        margin-top: 16px;
-      }
-      .links a {
-        display: inline-block;
-        margin: 8px 0;
-        padding: 10px 16px;
-        background: #0366d6;
-        color: #fff;
-        border-radius: 6px;
-        text-decoration: none;
-        font-weight: 600;
-      }
-      .links a:hover {
-        background: #024ea2;
-      }
-      .small {
-        color: #444;
-        font-size: 0.9rem;
-        margin-top: 8px;
+        box-shadow: var(--shadow);
       }
     </style>
   </head>
@@ -63,34 +98,57 @@
       <div class="logo">
         <img src="Doit_logo.jpeg" alt="로고" />
       </div>
-      <!-- 링크/문구 -->
-      <div class="links">
+
+      <!-- 버튼 2개: 위/아래로 배치, 사진 폭과 동일 -->
+      <div class="btn-col">
         <a
-          class="insta-btn"
+          id="btn-insta"
           href="https://instagram.com/ajou_doit"
           target="_blank"
           rel="noopener noreferrer"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="1em"
-            height="1em"
             viewBox="0 0 26 26"
             aria-hidden="true"
           >
             <path
-              d="M13.1798 6.96338C10.0743 6.96338 7.56946 9.46826 7.56946 12.5737C7.56946 15.6792 10.0743 18.1841 13.1798 18.1841C16.2853 18.1841 18.7902 15.6792 18.7902 12.5737C18.7902 9.46826 16.2853 6.96338 13.1798 6.96338ZM13.1798 16.2212C11.173 16.2212 9.53235 14.5854 9.53235 12.5737C9.53235 10.562 11.1681 8.92627 13.1798 8.92627C15.1915 8.92627 16.8273 10.562 16.8273 12.5737C16.8273 14.5854 15.1866 16.2212 13.1798 16.2212ZM20.3282 6.73389C20.3282 7.46143 19.7423 8.04248 19.0197 8.04248C18.2921 8.04248 17.7111 7.45654 17.7111 6.73389C17.7111 6.01123 18.297 5.42529 19.0197 5.42529C19.7423 5.42529 20.3282 6.01123 20.3282 6.73389ZM24.0441 8.06201C23.9611 6.30908 23.5607 4.75635 22.2765 3.47705C20.9972 2.19775 19.4445 1.79736 17.6915 1.70947C15.8849 1.60693 10.4698 1.60693 8.66321 1.70947C6.91516 1.79248 5.36243 2.19287 4.07825 3.47217C2.79407 4.75146 2.39856 6.3042 2.31067 8.05713C2.20813 9.86377 2.20813 15.2788 2.31067 17.0854C2.39368 18.8384 2.79407 20.3911 4.07825 21.6704C5.36243 22.9497 6.91028 23.3501 8.66321 23.438C10.4698 23.5405 15.8849 23.5405 17.6915 23.438C19.4445 23.355 20.9972 22.9546 22.2765 21.6704C23.5558 20.3911 23.9562 18.8384 24.0441 17.0854C24.1466 15.2788 24.1466 9.86865 24.0441 8.06201ZM21.7101 19.0239C21.3292 19.981 20.5919 20.7183 19.63 21.104C18.1896 21.6753 14.7716 21.5435 13.1798 21.5435C11.588 21.5435 8.16516 21.6704 6.72961 21.104C5.77258 20.7231 5.03528 19.9858 4.64954 19.0239C4.07825 17.5835 4.21008 14.1655 4.21008 12.5737C4.21008 10.9819 4.08313 7.55908 4.64954 6.12354C5.0304 5.1665 5.7677 4.4292 6.72961 4.04346C8.17004 3.47217 11.588 3.604 13.1798 3.604C14.7716 3.604 18.1945 3.47705 19.63 4.04346C20.587 4.42432 21.3243 5.16162 21.7101 6.12354C22.2814 7.56396 22.1495 10.9819 22.1495 12.5737C22.1495 14.1655 22.2814 17.5884 21.7101 19.0239Z"
+              d="M13.1798 6.96338C10.0743 6.96338 7.56946 9.46826 7.56946 12.5737C7.56946 15.6792 10.0743 18.1841 13.1798 18.1841C16.2853 18.1841 18.7902 15.6792 18.7902 12.5737C18.7902 9.46826 16.2853 6.96338 13.1798 6.96338ZM13.1798 16.2212C11.173 16.2212 9.53235 14.5854 9.53235 12.5737C9.53235 10.562 11.1681 8.92627 13.1798 8.92627C15.1915 8.92627 16.8273 10.562 16.8273 12.5737C16.8273 14.5854 15.1866 16.2212 13.1798 16.2212ZM20.3282 6.73389C20.3282 7.46143 19.7423 8.04248 19.0197 8.04248C18.2921 8.04248 17.7111 7.45654 17.7111 6.73389C17.7111 6.01123 18.297 5.42529 19.0197 5.42529C19.7423 5.42529 20.3282 6.01123 20.3282 6.73389ZM24.0441 8.06201C23.9611 6.30908 23.5607 4.75635 22.2765 3.47705C20.9972 2.19775 19.4445 1.79736 17.6915 1.70947C15.8849 1.60693 10.4698 1.60693 8.66321 1.70947C6.91516 1.79248 5.36243 2.19287 4.07825 3.47217C2.79407 4.75146 2.39856 6.3042 2.31067 8.05713C2.20813 9.86377 2.20813 15.2788 2.31067 17.0854C2.39368 18.8384 2.79407 20.3911 4.07825 21.6704C5.36243 22.9497 6.91028 23.3501 8.66321 23.438C10.4698 23.5405 15.8849 23.5405 17.6915 23.438C19.4445 23.355 20.9972 22.9546 22.2765 21.6704C23.5558 20.3911 23.9562 18.8384 24.0441 17.0854C24.1466 15.2788 24.1466 9.86865 24.0441 8.06201Z"
               fill="currentColor"
             />
           </svg>
           <span>DO-IT! 인스타그램 바로가기</span>
         </a>
-        <p class="small">
-          DO-IT! 부스에 방문해 주셔서 감사합니다.<br />
-          영수증 사진과 함께 @ajou_doit을 <br />태그해서 스토리 공유시 추첨을
-          통해 상품권이 제공됩니다.
-        </p>
+
+        <a
+          id="btn-join"
+          href="https://instagram.com/ajou_doit"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg
+            width="26"
+            height="21"
+            viewBox="0 0 26 21"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              d="M9.43237 10.2727C12.1941 10.2727 14.4324 8.03442 14.4324 5.27271C14.4324 2.51099 12.1941 0.272705 9.43237 0.272705C6.67065 0.272705 4.43237 2.51099 4.43237 5.27271C4.43237 8.03442 6.67065 10.2727 9.43237 10.2727ZM12.9324 11.5227H12.28C11.4128 11.9211 10.448 12.1477 9.43237 12.1477C8.41675 12.1477 7.45581 11.9211 6.58472 11.5227H5.93237C3.03394 11.5227 0.682373 13.8743 0.682373 16.7727V18.3977C0.682373 19.4329 1.52222 20.2727 2.55737 20.2727H13.2957C13.2019 20.0071 13.1628 19.7258 13.1941 19.4407L13.4597 17.0618L13.5066 16.6282L13.8152 16.3196L16.8347 13.3C15.8777 12.218 14.491 11.5227 12.9324 11.5227ZM14.7019 17.1985L14.4363 19.5813C14.3933 19.9797 14.7292 20.3157 15.1238 20.2688L17.5027 20.0032L22.8894 14.6165L20.0886 11.8157L14.7019 17.1985ZM25.4089 10.7766L23.9285 9.29614C23.5652 8.93286 22.9714 8.93286 22.6082 9.29614L21.1316 10.7727L20.9714 10.9329L23.7761 13.7336L25.4089 12.1008C25.7722 11.7336 25.7722 11.1438 25.4089 10.7766Z"
+              fill="currentColor"
+            />
+          </svg>
+          <span>Do_iT! 신입부원 가입 링크</span>
+        </a>
       </div>
+
+      <p class="small">
+        DO-IT! 부스에 방문해 주셔서 감사합니다.<br />
+        영수증 사진과 함께 @ajou_doit을 태그해서<br />
+        스토리 공유 시 추첨으로 상품권이 제공됩니다.
+      </p>
+
       <!-- 사진 영역 -->
       <div class="photos" id="photos"></div>
     </div>
@@ -102,33 +160,30 @@
         if (!sid) return;
 
         const metaUrl = `https://qzcfjssimpxniwibxxit.supabase.co/storage/v1/object/public/sessions/${sid}/meta.json`;
+
         try {
           const res = await fetch(metaUrl);
           if (!res.ok) throw new Error('메타데이터 로드 실패');
           const data = await res.json();
 
-          // 로고 교체
+          // 로고
           const logoImg = document.querySelector('.logo img');
-          if (data.logo_url) {
-            logoImg.src = data.logo_url;
-          }
+          if (data.logo_url) logoImg.src = data.logo_url;
 
-          // 인스타 링크 교체
-          const instaBtn = document.querySelector('.insta-btn');
+          // 인스타 링크 (첫 번째 버튼만 교체)
           if (data.instagram_url) {
-            instaBtn.href = data.instagram_url;
+            document.getElementById('btn-insta').href = data.instagram_url;
           }
 
-          // 문구 교체
-          const smallText = document.querySelector('.small');
+          // 안내 문구
           if (data.short_text) {
-            smallText.textContent = data.short_text;
+            document.querySelector('.small').textContent = data.short_text;
           }
 
-          // 사진들 추가
+          // 사진들
           const photosDiv = document.getElementById('photos');
-          photosDiv.innerHTML = ''; // 기존 비워주고
-          data.photos.forEach((url) => {
+          photosDiv.innerHTML = '';
+          (data.photos || []).forEach((url) => {
             const img = document.createElement('img');
             img.src = url;
             img.alt = 'photo';

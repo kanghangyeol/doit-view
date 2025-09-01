@@ -144,11 +144,7 @@
         </a>
       </div>
 
-      <p class="small">
-        DO-IT! 부스에 방문해 주셔서 감사합니다.<br />
-        영수증 사진과 함께 @ajou_doit을 태그해서<br />
-        스토리 공유 시 추첨으로 상품권이 제공됩니다.121
-      </p>
+      <p class="small">...</p>
 
       <!-- 사진 영역 -->
       <div class="photos" id="photos"></div>
@@ -171,14 +167,16 @@
           const logoImg = document.querySelector('.logo img');
           if (data.logo_url) logoImg.src = data.logo_url;
 
-          // 인스타 링크 (첫 번째 버튼만 교체)
+          // 인스타 링크
           if (data.instagram_url) {
             document.getElementById('btn-insta').href = data.instagram_url;
           }
 
-          // 안내 문구
-          if (data.short_text) {
-            document.querySelector('.small').textContent = data.short_text;
+          // 안내 문구 (QR 페이지 전용 텍스트: page_text 사용)
+          if (data.page_text) {
+            const small = document.querySelector('.small');
+            // \n → <br> 치환해서 줄바꿈 유지
+            small.innerHTML = String(data.page_text).replace(/\n/g, '<br>');
           }
 
           // 사진들

@@ -3,7 +3,7 @@ from __future__ import annotations
 from PIL import Image, ImageDraw, ImageFont
 import qrcode
 
-# ----------------- 기본 유틸 -----------------
+# ----------------- 기본 유틸 -----------------테
 def fit_width_keep_aspect(im: Image.Image, width: int) -> Image.Image:
     if im.width == width:
         return im
